@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart To-Do App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>📝 Smart To-Do List</h1>
+
+    <div class="container">
+        <form action="/add" method="post">
+            <input type="text" name="task" placeholder="Enter task..." required>
+            <button type="submit">Add</button>
+        </form>
+
+        <ul>
+            {% for task in tasks %}
+            <li>
+                {% if task[2] == 1 %}
+                    <span style="text-decoration: line-through;">{{ task[1] }}</span>
+                {% else %}
+                    {{ task[1] }}
+                {% endif %}
+
+                <div>
+                    <a href="/complete/{{ task[0] }}">✔️</a>
+                    <a href="/delete/{{ task[0] }}">❌</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
+</html>
